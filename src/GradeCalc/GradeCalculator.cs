@@ -22,7 +22,7 @@ public static class GradeCalculator
             total += score;
         }
 
-        return total / scores.Count;
+        return (double)total / scores.Count;
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ public static class GradeCalculator
     /// </summary>
     public static string ToLetter(double percent)
     {
-        if (percent > 90)
+        if (percent >= 90)
         {
             return "A";
         }
@@ -61,7 +61,7 @@ public static class GradeCalculator
             return score;
         }
 
-        return score - daysLate * 10;
+        return Math.Max(0, score - daysLate * 10);
     }
 
     /// <summary>
@@ -70,5 +70,15 @@ public static class GradeCalculator
     public static bool IsPassing(double percent)
     {
         return percent >= 60;
+    }
+
+    /// <summary>
+    /// Works out the final course grade. Labs are worth 40% and the exam is worth 60%.
+    /// The result is rounded to 1 decimal place.
+    /// </summary>
+    public static double FinalGrade(IReadOnlyList<int> labScores, int examScore)
+    {
+        double final = Average(labScores) * 0.4 + examScore * 0.6;
+        return Math.Round(final, 1, MidpointRounding.AwayFromZero);
     }
 }
