@@ -8,7 +8,7 @@ This is a small C# console app that works out student grades. It has **3 bugs**,
 
 ```bash
 git clone https://github.com/mskim9097/comp4976_project.git
-cd claude-code-lab
+cd comp4976_project
 dotnet test                     # expect: 15 total, 3 failed
 dotnet run --project src/GradeCalc
 ```
